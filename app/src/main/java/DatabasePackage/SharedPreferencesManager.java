@@ -5,14 +5,30 @@ import android.content.SharedPreferences;
 
 import com.borisruzanov.btgtranslator.TextTranslationPackage.Contract;
 
-public class SharedPreferencesManager {
+public class SharedPreferencesManager implements IPreferencesManager {
 
-    Context context;
+    SharedPreferences mSettings;
 
+    public SharedPreferencesManager(Context context) {
+        this.mSettings =  context.getSharedPreferences(Contract.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+    }
+
+    @Override
     public void saveSharedPreferencesForInputText(String translatedTextInput) {
-        SharedPreferences mSettings = context.getSharedPreferences(Contract.SHARED_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = mSettings.edit();
-        ed.putString(Contract.INPUT_TEXT, Contract.getInputText());
+        ed.putString(Contract.INPUT_TEXT, translatedTextInput);
+        ed.apply();
+    }
+
+    @Override
+    public String getLanguage() {
+        return mSettings.getString(Contract.Language,"en");//DEFAULT
+    }
+
+    @Override
+    public void setLanguage(String language) {
+        SharedPreferences.Editor ed = mSettings.edit();
+        ed.putString(Contract.Language, language);
         ed.apply();
     }
 }

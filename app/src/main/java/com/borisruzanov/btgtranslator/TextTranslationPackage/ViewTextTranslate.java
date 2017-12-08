@@ -2,19 +2,15 @@ package com.borisruzanov.btgtranslator.TextTranslationPackage;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 
 import com.borisruzanov.btgtranslator.R;
+import com.borisruzanov.btgtranslator.TextTranslationPackage.base.BaseActivity;
+import com.borisruzanov.btgtranslator.TextTranslationPackage.http.HttpService;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class ViewTextTranslate extends AppCompatActivity implements ViewTextTranslateInterface {
+public class ViewTextTranslate extends BaseActivity implements ViewTextTranslateInterface,IUiCallBack {
 
 
     AppCompatButton chooseLanguageButton;
@@ -23,14 +19,14 @@ public class ViewTextTranslate extends AppCompatActivity implements ViewTextTran
     AppCompatEditText translatedTextInput;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
-    PresenterImplMain presenterMainImpl;
-    Timer timer;
+    PresenterMainInterface presenterMainImpl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        presenterMainImpl=new PresenterImplMain(getPreferenceManager(),new HttpService(this),this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,29 +38,19 @@ public class ViewTextTranslate extends AppCompatActivity implements ViewTextTran
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
-        presenterMainImpl = new PresenterImplMain();
 
-        translatedTextInput.addTextChangedListener(new TextWatcher() {
+        TranslatetextWatcher watcher = new TranslatetextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void textChange(String text) {
+                presenterMainImpl.translateText(text);
             }
+        };
+        translatedTextInput.addTextChangedListener(watcher);
+    }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                            presenterMainImpl.saveInputTextInStaticVariable(translatedTextInput.getText().toString());
-
-                    }
-                },600);
-
-            }
-        });
+    @Override
+    public void textTranslated(String text, String result) {
+        //TODO SET TEXT TO VIEw
     }
 }
