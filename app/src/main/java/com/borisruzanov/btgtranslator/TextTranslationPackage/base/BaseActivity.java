@@ -2,12 +2,8 @@ package com.borisruzanov.btgtranslator.TextTranslationPackage.base;
 
 import android.support.v7.app.AppCompatActivity;
 
-import DatabasePackage.IPreferencesManager;
-import DatabasePackage.SharedPreferencesManager;
-
-/**
- * Created by Boris on 12/7/2017.
- */
+import com.borisruzanov.btgtranslator.TextTranslationPackage.database.IPreferencesManager;
+import com.borisruzanov.btgtranslator.TextTranslationPackage.database.SharedPreferencesManager;
 
 public class BaseActivity extends AppCompatActivity {
     private IPreferencesManager _pm;

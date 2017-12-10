@@ -1,16 +1,19 @@
-package com.borisruzanov.btgtranslator.TextTranslationPackage;
+package com.borisruzanov.btgtranslator.TextTranslationPackage.text_translate_module;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.borisruzanov.btgtranslator.R;
+import com.borisruzanov.btgtranslator.TextTranslationPackage.Contract;
 import com.borisruzanov.btgtranslator.TextTranslationPackage.base.BaseActivity;
-import com.borisruzanov.btgtranslator.TextTranslationPackage.http.HttpService;
+import com.borisruzanov.btgtranslator.TextTranslationPackage.services.http.HttpService;
+import com.borisruzanov.btgtranslator.TextTranslationPackage.utils.TextWatcherUtil;
 
-public class ViewTextTranslate extends BaseActivity implements ViewTextTranslateInterface,IUiCallBack {
+public class TextActivity extends BaseActivity implements ITextActivity,IUiCallBack {
 
 
     AppCompatButton chooseLanguageButton;
@@ -19,16 +22,18 @@ public class ViewTextTranslate extends BaseActivity implements ViewTextTranslate
     AppCompatEditText translatedTextInput;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
-    PresenterMainInterface presenterMainImpl;
+    ITextPresenter presenter;
+    TextWatcherUtil watcher;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v(Contract.TAG, "View - In OnCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenterMainImpl=new PresenterImplMain(getPreferenceManager(),new HttpService(this),this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         translatedTextOutput = (AppCompatEditText) findViewById(R.id.translated_text_field);
         translatedTextInput = (AppCompatEditText) findViewById(R.id.translation_input_edit);
@@ -36,13 +41,14 @@ public class ViewTextTranslate extends BaseActivity implements ViewTextTranslate
         chooseLanguageButton = (AppCompatButton) findViewById(R.id.choose_language_button);
         cleanButton = (AppCompatButton) findViewById(R.id.clean_button);
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        presenter =new TextPresenter(getPreferenceManager(),new HttpService(this),this);
 
-
-        TranslatetextWatcher watcher = new TranslatetextWatcher() {
+        //Start working when text changed
+        watcher = new TextWatcherUtil() {
             @Override
-            public void textChange(String text) {
-                presenterMainImpl.translateText(text);
+            public void callTextWatcherMethod(String text) {
+                Log.v(Contract.TAG, "View - In callTextWatcherMethod");
+                presenter.saveInputTextInSharedPreferences(text);
             }
         };
         translatedTextInput.addTextChangedListener(watcher);

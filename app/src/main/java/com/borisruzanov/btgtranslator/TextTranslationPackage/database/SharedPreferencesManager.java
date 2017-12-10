@@ -1,7 +1,8 @@
-package DatabasePackage;
+package com.borisruzanov.btgtranslator.TextTranslationPackage.database;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.borisruzanov.btgtranslator.TextTranslationPackage.Contract;
 
@@ -15,6 +16,7 @@ public class SharedPreferencesManager implements IPreferencesManager {
 
     @Override
     public void saveSharedPreferencesForInputText(String translatedTextInput) {
+        Log.v(Contract.TAG, "SharedPreferencesManager - In saveSharedPreferencesForInputText " + translatedTextInput.toString());
         SharedPreferences.Editor ed = mSettings.edit();
         ed.putString(Contract.INPUT_TEXT, translatedTextInput);
         ed.apply();

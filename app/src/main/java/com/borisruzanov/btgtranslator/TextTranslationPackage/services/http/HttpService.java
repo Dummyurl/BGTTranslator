@@ -1,4 +1,4 @@
-package com.borisruzanov.btgtranslator.TextTranslationPackage.http;
+package com.borisruzanov.btgtranslator.TextTranslationPackage.services.http;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,7 +15,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.borisruzanov.btgtranslator.TextTranslationPackage.service.UrlBuilder;
+import com.borisruzanov.btgtranslator.TextTranslationPackage.Contract;
+import com.borisruzanov.btgtranslator.TextTranslationPackage.services.UrlBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,8 +27,7 @@ public class HttpService implements IHttpService{
     private final RequestQueue requestQueue;
     private UrlBuilder urlBuilder;
     public HttpService(Context context) {
-         urlBuilder = new UrlBuilder();
-
+        urlBuilder = new UrlBuilder();
         requestQueue = Volley.newRequestQueue(context);
     }
 
@@ -44,7 +44,9 @@ public class HttpService implements IHttpService{
                             results = response.getJSONObject("data").getJSONArray("translations");
                             for (int i=0,j=results.length();i<j;i++) {
                                 String webTitle = results.getJSONObject(i).getString("translatedText");
-                               callBack.call(webTitle);
+                                Log.v(Contract.TAG, "HttpService - In onResponse");
+
+                                callBack.call(webTitle);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

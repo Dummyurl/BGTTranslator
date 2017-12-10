@@ -1,4 +1,4 @@
-package DatabasePackage;
+package com.borisruzanov.btgtranslator.TextTranslationPackage.database;
 
 /**
  * Created by Boris on 12/7/2017.

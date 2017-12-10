@@ -6,4 +6,6 @@ public class Contract {
     public final static String SHARED_PREFERENCES = "preferences";
 
     public final static String Language="Language";
+
+    public final static String TAG = "Tag";
 }

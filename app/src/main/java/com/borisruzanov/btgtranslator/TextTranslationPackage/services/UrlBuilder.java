@@ -1,4 +1,4 @@
-package com.borisruzanov.btgtranslator.TextTranslationPackage.service;
+package com.borisruzanov.btgtranslator.TextTranslationPackage.services;
 
 public class UrlBuilder{
 

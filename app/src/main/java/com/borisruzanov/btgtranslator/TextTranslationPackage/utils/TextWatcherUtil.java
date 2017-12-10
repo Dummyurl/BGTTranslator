@@ -1,15 +1,18 @@
-package com.borisruzanov.btgtranslator.TextTranslationPackage;
+package com.borisruzanov.btgtranslator.TextTranslationPackage.utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+
+import com.borisruzanov.btgtranslator.TextTranslationPackage.Contract;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public abstract class  TranslatetextWatcher implements TextWatcher {
+public abstract class TextWatcherUtil implements TextWatcher {
     Timer timer;
 
-    public TranslatetextWatcher() {
+    public TextWatcherUtil() {
         this.timer = new Timer();
     }
 
@@ -28,13 +31,13 @@ public abstract class  TranslatetextWatcher implements TextWatcher {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-
-                textChange(editable.toString());
+                Log.v(Contract.TAG, "Util TextWatcher - In afterTextChange");
+                callTextWatcherMethod(editable.toString());
 
             }
         }, 600);
 
     }
 
-    public abstract void textChange(String text);
+    public abstract void callTextWatcherMethod(String text);
 }
