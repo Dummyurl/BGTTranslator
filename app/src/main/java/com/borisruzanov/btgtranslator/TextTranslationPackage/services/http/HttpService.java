@@ -32,10 +32,10 @@ public class HttpService implements IHttpService{
     }
 
     @Override
-    public void translateText(String language, String text, final CallBack<String> callBack) {
+    public void translateText(String language, String inputText, final CallBack<String> callBack) {
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, urlBuilder.buildUrl(text, language), null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, urlBuilder.buildUrl(inputText, language), null, new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -58,7 +58,9 @@ public class HttpService implements IHttpService{
                     public void onErrorResponse(VolleyError error) {
                         if (error instanceof NetworkError) {
                         } else if (error instanceof ServerError) {
+                            Log.e(TAG, "Server error! Please try again after some time!!");
                         } else if (error instanceof AuthFailureError) {
+                            Log.e(TAG, "Auth error! Please try again after some time!!");
                         } else if (error instanceof ParseError) {
                             Log.e(TAG, "Parsing error! Please try again after some time!!");
                         } else if (error instanceof NoConnectionError) {

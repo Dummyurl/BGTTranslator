@@ -22,6 +22,8 @@ public class TextActivity extends BaseActivity implements ITextActivity,IUiCallB
     AppCompatEditText translatedTextInput;
     BottomNavigationView bottomNavigationView;
     Toolbar toolbar;
+
+
     ITextPresenter presenter;
     TextWatcherUtil watcher;
 
@@ -41,14 +43,15 @@ public class TextActivity extends BaseActivity implements ITextActivity,IUiCallB
         chooseLanguageButton = (AppCompatButton) findViewById(R.id.choose_language_button);
         cleanButton = (AppCompatButton) findViewById(R.id.clean_button);
 
-        presenter =new TextPresenter(getPreferenceManager(),new HttpService(this),this);
+
+        presenter = new TextPresenter(new TextInteractor(getPreferenceManager(),new HttpService(this),this));
 
         //Start working when text changed
         watcher = new TextWatcherUtil() {
             @Override
             public void callTextWatcherMethod(String text) {
                 Log.v(Contract.TAG, "View - In callTextWatcherMethod");
-                presenter.saveInputTextInSharedPreferences(text);
+                presenter.forwardTextToInteractor(text);
             }
         };
         translatedTextInput.addTextChangedListener(watcher);
@@ -56,7 +59,8 @@ public class TextActivity extends BaseActivity implements ITextActivity,IUiCallB
 
 
     @Override
-    public void textTranslated(String text, String result) {
-        //TODO SET TEXT TO VIEw
+    public void textTranslated(String inputText, String result) {
+        translatedTextOutput.setText(result);
+        Log.d("Translated", "Translated:" + result);
     }
 }
