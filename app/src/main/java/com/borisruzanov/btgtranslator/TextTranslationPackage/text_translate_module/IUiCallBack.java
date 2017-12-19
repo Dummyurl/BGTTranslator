@@ -2,4 +2,5 @@ package com.borisruzanov.btgtranslator.TextTranslationPackage.text_translate_mod
 
 interface IUiCallBack {
     void textTranslated(String inputText ,String result);
+    void cleanTextFields();
 }

@@ -27,16 +27,13 @@ public abstract class TextWatcherUtil implements TextWatcher {
 
     @Override
     public void afterTextChanged(final Editable editable) {
-
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Log.v(Contract.TAG, "Util TextWatcher - In afterTextChange");
                 callTextWatcherMethod(editable.toString());
-
             }
         }, 600);
-
     }
 
     public abstract void callTextWatcherMethod(String text);

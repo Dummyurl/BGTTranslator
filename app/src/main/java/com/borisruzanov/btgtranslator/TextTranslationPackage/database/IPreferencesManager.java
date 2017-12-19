@@ -1,13 +1,21 @@
 package com.borisruzanov.btgtranslator.TextTranslationPackage.database;
 
-/**
- * Created by Boris on 12/7/2017.
- */
+
 
 public interface IPreferencesManager {
     void saveSharedPreferencesForInputText(String translatedTextInput);
 
-    String getLanguage();
-    void  setLanguage(String language);
+    void saveSharedPreferencesForLanguages(String shortLanguage, String longLanguage);
 
+    String getShortLanguage();
+
+    String getLongLanguage();
+
+    String getTextForInputField();
+
+    void cleanFields();
+
+    void saveSharedPreferencesForOutputText(String outputText);
+
+    String getTextForOutputField();
 }

@@ -23,11 +23,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HttpService implements IHttpService{
+//    language = mSettings.getString(LANGUAGE_SHORT,"");
+//    translatedInputString = translatedTextInput.getText().toString().replace(" ","+");
+
     private static String TAG ="HttpService";
     private final RequestQueue requestQueue;
     private UrlBuilder urlBuilder;
-    public HttpService(Context context) {
-        urlBuilder = new UrlBuilder();
+//    IPreferencesManager iPreferencesManager;
+
+
+    public HttpService(Context context, String language, String translatedTextInput) {
+        urlBuilder = new UrlBuilder(context, language, translatedTextInput);
         requestQueue = Volley.newRequestQueue(context);
     }
 
@@ -43,10 +49,10 @@ public class HttpService implements IHttpService{
                         try {
                             results = response.getJSONObject("data").getJSONArray("translations");
                             for (int i=0,j=results.length();i<j;i++) {
-                                String webTitle = results.getJSONObject(i).getString("translatedText");
+                                String translation = results.getJSONObject(i).getString("translatedText");
                                 Log.v(Contract.TAG, "HttpService - In onResponse");
 
-                                callBack.call(webTitle);
+                                callBack.call(translation);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

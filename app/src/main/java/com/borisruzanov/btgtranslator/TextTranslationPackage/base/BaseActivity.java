@@ -7,11 +7,12 @@ import com.borisruzanov.btgtranslator.TextTranslationPackage.database.SharedPref
 
 public class BaseActivity extends AppCompatActivity {
     private IPreferencesManager _pm;
+    String shortLanguage;
 
 
     public IPreferencesManager getPreferenceManager() {
         if(_pm==null)
-            _pm=new SharedPreferencesManager(this);
+            _pm=new SharedPreferencesManager(this, shortLanguage );
         return _pm;
     }
 }

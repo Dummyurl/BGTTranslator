@@ -2,4 +2,8 @@ package com.borisruzanov.btgtranslator.TextTranslationPackage.text_translate_mod
 
 public interface ITextPresenter {
         void forwardTextToInteractor(String text);
+        String forwardLongLanguageFromInteractor();
+        String getInputTextFromInteractor();
+        String getOutputTextFromInteractor();
+        void callCleanerFromInteractor();
 }

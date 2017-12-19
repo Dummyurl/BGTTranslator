@@ -1,3 +1,4 @@
 <resources>
-    <string name="input_text">input_text</string>
+    <string name="request_template" formatted="false" translatable="false">https://translation.googleapis.com/language/translate/%s</string>
+    <string name="query_Template" formatted="false" translatable="false">v2?q="%s"&amp;target="%s"&amp;key=AIzaSyBYruIXzvIXCkITbzUIQ1TlQJoOmNERnrw</string>
 </resources>

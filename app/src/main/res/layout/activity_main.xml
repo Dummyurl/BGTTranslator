@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/choose_language_button"
-            android:text="@string/choose_language"
+            android:text="@string/main_choose_language"
             android:layout_weight="10.66"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -107,22 +107,5 @@
             android:hint="@string/translated_text_will_appear_automatically"/>
 
     </android.support.v7.widget.CardView>
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/navigation_menu_botomm"
-            app:theme="@style/BottomNavigationTheme"
-            >
-        </android.support.design.widget.BottomNavigationView>
-
-    </android.support.design.widget.CoordinatorLayout>
 
 </RelativeLayout>

@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">BTG Translator</string>
     <string name="ok">OK</string>
-    <string name="choose_language">Choose language</string>
+    <string name="main_choose_language">Choose language</string>
     <string name="vision_page">Vision page</string>
     <string name="clean">Clean</string>
     <string name="clear">Clear</string>
     <string name="text">Text</string>
     <string name="camera">Camera</string>
     <string name="vision">Vision</string>
-    <string name="translated_text_will_appear_automatically">Translated text will appear automatically</string>
-    <string name="input_language_will_detect_automatically">Input language will detect automatically</string>
+    <string name="translated_text_will_appear_automatically">Translated text will appear here automatically</string>
+    <string name="input_language_will_detect_automatically">Language will detect automatically</string>
     <string name="photo">Photo</string>
     <string name="file">File</string>
     <string name="live">Live</string>

@@ -24,11 +24,41 @@ public class TextInteractor implements ITextInteractor {
     public void saveTextInputInSharedPreferences(final String text) {
         Log.v(Contract.TAG, "TextPresenter - In forwardTextToInteractor");
         iPreferenceManager.saveSharedPreferencesForInputText(text);
-        httpService.translateText(iPreferenceManager.getLanguage(), text, new CallBack<String>() {
+        httpService.translateText(iPreferenceManager.getShortLanguage(), text, new CallBack<String>() {
             @Override
             public void call(String outputText) {
                 uiCallBack.textTranslated(text,outputText);
+                saveTextOutputInSharedPreferences(outputText);
             }
         });
     }
+
+    @Override
+    public void saveTextOutputInSharedPreferences(String outputText) {
+        iPreferenceManager.saveSharedPreferencesForOutputText(outputText);
+    }
+
+    @Override
+    public String getOutputTextFromSharedPreferences() {
+        return iPreferenceManager.getTextForOutputField();
+    }
+
+    @Override
+    public String getLongLanguageFromSharedPreferences() {
+        return iPreferenceManager.getLongLanguage();
+    }
+
+    @Override
+    public String getInputTextFromSharedPreferences() {
+        return iPreferenceManager.getTextForInputField();
+
+    }
+
+    @Override
+    public void callCleanerFromSharedPreferenceManager() {
+        iPreferenceManager.cleanFields();
+        uiCallBack.cleanTextFields();
+    }
+
+
 }
