@@ -6,7 +6,7 @@ Google Cloud API / MVP /Material Design / Widget / MVP / REST Api
 * [Google Cloud API](https://cloud.google.com/translate/)
 ___
 ## Architecture
-* [MVP](* [MVP](https://cloud.google.com/translate/))
+* [MVP]([MVP](https://cloud.google.com/translate/))
 * [Clean Architecture](https://github.com/googlesamples/android-architecture)
 
 ## Covers
